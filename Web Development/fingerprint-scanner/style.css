@@ -1,0 +1,210 @@
+/*
+  Hey! If you liked this project, subscribe to my YouTube channel —
+  new web and mobile development videos coming every week :)
+  
+  Youtube: https://www.youtube.com/@Dev-Master-Mind
+  Website: https://dev-master-mind.vercel.app/
+  Mobile Apps: https://play.google.com/store/apps/dev?id=5401515301307159565
+*/
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background: #000;
+}
+
+.fingerprint-container {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  cursor: pointer;
+  animation: pulse 2s infinite ease-in-out;
+}
+
+.fingerprint-svg {
+  width: 100%;
+  height: 100%;
+  color: #f5f5f5;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+/* SVG path animation */
+.fingerprint-path {
+  fill: rgba(236, 236, 236, 0.527);
+  stroke-width: 0.5px;
+
+  stroke-dasharray: 100;
+  stroke-dashoffset: 0;
+}
+
+.scan-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(to right, transparent, #00ccff, transparent);
+  opacity: 0;
+}
+
+.ripple1,
+.ripple2 {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  border-radius: 50%;
+  border: 2px solid #00ff00;
+  opacity: 0;
+  transform: scale(0);
+}
+
+.glow {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  border-radius: 50%;
+  box-shadow: 0 0 20px #9aa5a8;
+  opacity: 0;
+}
+
+.status {
+  position: absolute;
+  bottom: -30px;
+  width: 100%;
+  text-align: center;
+  color: #a1a1a1;
+  font-size: 14px;
+  opacity: 0.7;
+  transition: opacity 0.3s ease, color 0.3s ease;
+}
+
+/* Hover effects */
+.fingerprint-container:hover .fingerprint-svg {
+  transform: scale(1.1);
+}
+
+.fingerprint-container:hover .fingerprint-path {
+  stroke: #f8f8f8;
+  animation: draw 4s infinite linear;
+}
+
+.fingerprint-container:hover .scan-line {
+  animation: scan 1.5s infinite linear;
+  opacity: 0.7;
+}
+
+/* Click effects */
+.fingerprint-container:active .fingerprint-svg {
+  color: #00ff00;
+
+  transform: scale(1.05) rotate(15deg);
+  animation: spin 0.5s ease-out;
+}
+
+.fingerprint-container:active .fingerprint-path {
+  fill: #00ff00;
+  stroke: #39ff39;
+  animation: draw-fast 0.5s linear;
+}
+
+.fingerprint-container:active .ripple1 {
+  animation: ripple-effect 0.6s ease-out;
+}
+
+.fingerprint-container:active .ripple2 {
+  animation: ripple-effect 0.8s ease-out 0.2s;
+}
+
+.fingerprint-container:active .glow {
+  box-shadow: 0 0 30px #00ff00;
+  animation: glow-effect 0.6s ease-out;
+}
+
+.fingerprint-container:active .status {
+  opacity: 1;
+  color: #00ff00;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+}
+
+@keyframes scan {
+  0% {
+    transform: translateY(0);
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(150px);
+    opacity: 0.7;
+  }
+}
+
+@keyframes ripple-effect {
+  0% {
+    transform: scale(0);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+
+@keyframes glow-effect {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.7;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: scale(1.05) rotate(0deg);
+  }
+  50% {
+    transform: scale(1.1) rotate(15deg);
+  }
+  100% {
+    transform: scale(1.05) rotate(0deg);
+  }
+}
+
+@keyframes draw {
+  0% {
+    stroke-dashoffset: 200;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes draw-fast {
+  0% {
+    stroke-dashoffset: 200;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
